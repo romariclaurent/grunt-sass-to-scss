@@ -17,7 +17,7 @@ module.exports = function(grunt) {
   var include_alias_regex = /(^\s*)\+(\s*)/;
 
   grunt.registerMultiTask('sass_to_scss', 'Convert sass to scss files', function() {
-
+    
     var options = this.options({
       separator: grunt.util.linefeed
     });
@@ -25,20 +25,22 @@ module.exports = function(grunt) {
     grunt.verbose.writeflags(options, 'Options');
 
     this.files.forEach(function(f) {
-
+      
       var validFiles = removeInvalidFiles(f);
 
       grunt.verbose.writeflags(validFiles, 'Valid files');
 
-      writeFile(f.dest, concatOutput(validFiles, options));
+      concatOutput(validFiles, options)
     });
   });
 
   var concatOutput = function(files, options) {
-    return files.map(function(filepath) {
+    files.forEach(function(filepath) {
       var sass = grunt.file.read(filepath);
-      return convertSassToScss(sass, options, filepath);
-    }).join(grunt.util.normalizelf(options.separator));
+      var scss = convertSassToScss(sass, options, filepath);
+      var scsspath = filepath.substr(0, filepath.lastIndexOf(".")) + ".scss";
+      writeFile(scsspath, scss);      
+    });
   };
 
   var removeInvalidFiles = function(files) {
