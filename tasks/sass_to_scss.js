@@ -17,7 +17,7 @@ module.exports = function(grunt) {
   var include_alias_regex = /(^\s*)\+(\s*)/;
 
   grunt.registerMultiTask('sass_to_scss', 'Convert sass to scss files', function() {
-    
+
     var options = this.options({
       separator: grunt.util.linefeed
     });
@@ -25,22 +25,20 @@ module.exports = function(grunt) {
     grunt.verbose.writeflags(options, 'Options');
 
     this.files.forEach(function(f) {
-      
+
       var validFiles = removeInvalidFiles(f);
 
       grunt.verbose.writeflags(validFiles, 'Valid files');
 
-      concatOutput(validFiles, options)
+      writeFile(f.dest, concatOutput(validFiles, options));
     });
   });
 
   var concatOutput = function(files, options) {
-    files.forEach(function(filepath) {
+    return files.map(function(filepath) {
       var sass = grunt.file.read(filepath);
-      var scss = convertSassToScss(sass, options, filepath);
-      var scsspath = filepath.substr(0, filepath.lastIndexOf(".")) + ".scss";
-      writeFile(scsspath, scss);      
-    });
+      return convertSassToScss(sass, options, filepath);
+    }).join(grunt.util.normalizelf(options.separator));
   };
 
   var removeInvalidFiles = function(files) {
@@ -110,7 +108,13 @@ module.exports = function(grunt) {
       end = text.substr(start.length);
     }
 
-    var splittedBeforeComments = splitBefore('//', end);
+    var splittedBeforeComments;
+    if (end.indexOf("@import") == -1){
+     splittedBeforeComments = splitBefore('//', end);
+    }else{
+      splittedBeforeComments = [end]
+    }
+
     var beforeComments = splittedBeforeComments[0];
     var splittedBeforeBrackets = splitBefore('}', beforeComments);
     var beforeBrackets = splittedBeforeBrackets[0];
