@@ -1,23 +1,23 @@
 {
-  "name": "grunt-sass-to-scss",
+  "name": "grunt-sass-to-scss-expand",
   "description": "Convert sass to scss files",
   "version": "0.1.9",
   "homepage": "https://github.com/arnaudrinquin/grunt-sass-to-scss",
   "author": {
-    "name": "Arnaud Rinquin",
-    "email": "rinquin.arnaud@gmail.com"
+    "name": "Romaric Laurent",
+    "email": "romaric.laurent@gmail.com"
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/arnaudrinquin/grunt-sass-to-scss.git"
+    "url": "git://github.com/romariclaurent/grunt-sass-to-scss.git"
   },
   "bugs": {
-    "url": "https://github.com/arnaudrinquin/grunt-sass-to-scss/issues"
+    "url": "https://github.com/romariclaurent/grunt-sass-to-scss/issues"
   },
   "licenses": [
     {
       "type": "MIT",
-      "url": "https://github.com/arnaudrinquin/grunt-sass-to-scss/blob/master/LICENSE-MIT"
+      "url": "https://github.com/romariclaurent/grunt-sass-to-scss/blob/master/LICENSE-MIT"
     }
   ],
   "engines": {
