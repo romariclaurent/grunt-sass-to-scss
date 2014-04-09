@@ -6,6 +6,8 @@
  * Licensed under the MIT license.
  */
 
+ var EOL = require('os').EOL
+
 module.exports = function(grunt) {
 
   'use strict';
@@ -144,7 +146,7 @@ module.exports = function(grunt) {
     if (input != null) {
 
       var raw_lines = _.reject(
-        input.split('\n'), // split every lines
+        input.split(EOL), // split every lines
         function(line){
           // reject empty or \* *\ comment only lines
           return line.match(/^\s*(\/\*.*\*\/.*)?(\/{2}.*)?$/);
