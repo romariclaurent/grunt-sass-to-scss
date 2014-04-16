@@ -111,7 +111,7 @@ module.exports = function(grunt) {
     }
 
     var splittedBeforeComments;
-    if (end.indexOf("@import") == -1){
+    if (end.indexOf("@import") == -1 && end.indexOf("http://") == -1){
      splittedBeforeComments = splitBefore('//', end);
     }else{
       splittedBeforeComments = [end]
